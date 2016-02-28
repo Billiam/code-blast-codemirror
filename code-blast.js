@@ -3,7 +3,15 @@ Based on Joel Besada's lovely experiment
 https://twitter.com/JoelBesada/status/670343885655293952
  */
 
-;(function () {
+(function (factory) {
+	if (typeof exports === 'object' && typeof module === 'object') { // CommonJS
+		factory(require('codemirror/lib/codemirror'));
+	} else if (typeof define === 'function' && define.amd) { // AMD
+		define(['codemirror/lib/codemirror'], factory);
+	} else { // Plain browser env
+		factory(CodeMirror);
+	}
+})(function (CodeMirror) {
 	var shakeTime = 0,
 		shakeTimeMax = 0,
 		shakeIntensity = 5,
@@ -206,6 +214,5 @@ https://twitter.com/JoelBesada/status/670343885655293952
 		} else {
 			destroy();
 		}
-
 	});
-})();
+});
